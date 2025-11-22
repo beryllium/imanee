@@ -4,16 +4,17 @@ namespace Imanee\Tests;
 
 use Imanee\Imanee;
 use Imanee\PixelMath;
+use PHPUnit\Framework\TestCase;
 use PHPUnit_Framework_TestCase;
 
-class PixelMathTest extends PHPUnit_Framework_TestCase
+class PixelMathTest extends TestCase
 {
     /**
      * @var PixelMath
      */
     private $pixelMath;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->pixelMath = new PixelMath();
     }

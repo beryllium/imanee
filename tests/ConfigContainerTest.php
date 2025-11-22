@@ -5,16 +5,18 @@
 
 namespace Imanee\Tests;
 
-class ConfigContainerTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class ConfigContainerTest extends TestCase
 {
     protected $model;
 
-    public function setup()
+    public function setup(): void
     {
         $this->model = $this->getMockForAbstractClass('Imanee\ConfigContainer');
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->model = null;
     }

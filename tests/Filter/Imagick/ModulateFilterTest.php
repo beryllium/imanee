@@ -7,17 +7,18 @@ namespace imanee\tests\Filter\Imagick;
 
 
 use Imanee\Filter\Imagick\ModulateFilter;
+use PHPUnit\Framework\TestCase;
 
-class ModulateFilterTest extends \PHPUnit_Framework_TestCase
+class ModulateFilterTest extends TestCase
 {
     protected $model;
 
-    public function setup()
+    public function setup(): void
     {
         $this->model = new ModulateFilter();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->model = null;
     }

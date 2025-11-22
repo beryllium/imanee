@@ -7,17 +7,18 @@ namespace imanee\tests\Filter\Imagick;
 
 
 use Imanee\Filter\Imagick\SepiaFilter;
+use PHPUnit\Framework\TestCase;
 
-class SepiaFilterTest extends \PHPUnit_Framework_TestCase
+class SepiaFilterTest extends TestCase
 {
     protected $model;
 
-    public function setup()
+    public function setup(): void
     {
         $this->model = new SepiaFilter();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->model = null;
     }

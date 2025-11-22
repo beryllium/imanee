@@ -7,17 +7,18 @@ namespace imanee\tests\Filter\Imagick;
 
 
 use Imanee\Filter\Imagick\BWFilter;
+use PHPUnit\Framework\TestCase;
 
-class BWFilterTest extends \PHPUnit_Framework_TestCase
+class BWFilterTest extends TestCase
 {
     protected $model;
 
-    public function setup()
+    public function setup(): void
     {
         $this->model = new BWFilter();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->model = null;
     }
