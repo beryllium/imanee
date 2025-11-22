@@ -5,19 +5,19 @@
 
 namespace Imanee\Tests;
 
-
 use Imanee\Drawer;
+use PHPUnit\Framework\TestCase;
 
-class DrawerTest extends \PHPUnit_Framework_TestCase
+class DrawerTest extends TestCase
 {
     protected $model;
 
-    public function setup()
+    public function setup(): void
     {
         $this->model = new Drawer();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->model = null;
     }

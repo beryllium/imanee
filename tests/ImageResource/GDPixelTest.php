@@ -5,9 +5,11 @@
 
 namespace Imanee\Tests;
 
+use Imanee\Exception\InvalidColorException;
 use Imanee\ImageResource\GDPixel;
+use PHPUnit\Framework\TestCase;
 
-class GDPixelTest extends \PHPUnit_Framework_TestCase
+class GDPixelTest extends TestCase
 {
 
     /**
@@ -54,10 +56,10 @@ class GDPixelTest extends \PHPUnit_Framework_TestCase
     /**
      * Check that colours can be created from appropriate color strings
      * @dataProvider badColorTestValues
-     * @expectedException \Imanee\Exception\InvalidColorException
      */
     public function testBadCreateGDPixelByColorString($hexColor)
     {
+        $this->expectException(InvalidColorException::class);
         new GDPixel($hexColor);
         $this->fail('InvalidColorException expected');
     }
@@ -96,10 +98,10 @@ class GDPixelTest extends \PHPUnit_Framework_TestCase
     /**
      * Check that colours can be created from appropriate color strings
      * @dataProvider badColorTestValues
-     * @expectedException \Imanee\Exception\InvalidColorException
      */
     public function testBadCreateGDPixelByStaticLoadColorString($hexColor)
     {
+        $this->expectException(InvalidColorException::class);
         new GDPixel($hexColor);
         $this->fail('InvalidColorException expected');
     }

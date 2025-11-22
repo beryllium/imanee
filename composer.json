@@ -11,13 +11,13 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0"
+        "php": ">=8.3"
     },
     "require-dev": {
-        "phpunit/phpunit": "3.7.*",
+        "phpunit/phpunit": "^8.5.48",
         "ext-imagick": "*",
         "ext-gd": "*",
-        "mockery/mockery": "^0.9.4",
+        "mockery/mockery": "^1.3.0",
         "satooshi/php-coveralls": "^0.6.1",
         "raveren/kint":"^1.0"
     },

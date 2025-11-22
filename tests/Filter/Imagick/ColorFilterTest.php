@@ -7,17 +7,18 @@ namespace imanee\tests\Filter\Imagick;
 
 
 use Imanee\Filter\Imagick\ColorFilter;
+use PHPUnit\Framework\TestCase;
 
-class ColorFilterTest extends \PHPUnit_Framework_TestCase
+class ColorFilterTest extends TestCase
 {
     protected $model;
 
-    public function setup()
+    public function setup(): void
     {
         $this->model = new ColorFilter();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->model = null;
     }

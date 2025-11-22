@@ -5,19 +5,19 @@
 
 namespace imanee\tests;
 
-
 use Imanee\FilterResolver;
+use PHPUnit\Framework\TestCase;
 
-class FilterResolverTest extends \PHPUnit_Framework_TestCase
+class FilterResolverTest extends TestCase
 {
     protected $model;
 
-    public function setup()
+    public function setup(): void
     {
         $this->model = new FilterResolver();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->model = null;
     }

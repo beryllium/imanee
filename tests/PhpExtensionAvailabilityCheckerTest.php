@@ -3,16 +3,17 @@
 namespace Imanee\Tests;
 
 use Imanee\PhpExtensionAvailabilityChecker;
+use PHPUnit\Framework\TestCase;
 use PHPUnit_Framework_TestCase;
 
-class PhpExtensionAvailabilityCheckerTest extends PHPUnit_Framework_TestCase
+class PhpExtensionAvailabilityCheckerTest extends TestCase
 {
     /**
      * @var PhpExtensionAvailabilityChecker;
      */
     private $PhpExtensionAvailabilityChecker;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->PhpExtensionAvailabilityChecker = new PhpExtensionAvailabilityChecker();
     }

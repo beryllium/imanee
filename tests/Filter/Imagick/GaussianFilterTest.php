@@ -7,17 +7,18 @@ namespace imanee\tests\Filter\Imagick;
 
 
 use Imanee\Filter\Imagick\GaussianFilter;
+use PHPUnit\Framework\TestCase;
 
-class GaussianFilterTest extends \PHPUnit_Framework_TestCase
+class GaussianFilterTest extends TestCase
 {
     protected $model;
 
-    public function setup()
+    public function setup(): void
     {
         $this->model = new GaussianFilter();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->model = null;
     }

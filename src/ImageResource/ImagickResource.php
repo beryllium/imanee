@@ -83,7 +83,7 @@ class ImagickResource extends Resource implements
      */
     public $background;
 
-    public function __construct(Imagick $resource = null)
+    public function __construct(?Imagick $resource = null)
     {
         if (!is_null($resource)) {
             $this->resource = $resource;
@@ -260,8 +260,8 @@ class ImagickResource extends Resource implements
     public function updateResourceDimensions()
     {
         $newsize = $this->resource->getImageGeometry();
-        $this->width  = $newsize['width'];
-        $this->height = $newsize['height'];
+        $this->width  = $newsize['width'] ?? null;
+        $this->height = $newsize['height'] ?? null;
     }
 
     /**

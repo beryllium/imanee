@@ -1,18 +1,24 @@
 <?php
 namespace Imanee\Tests;
 
+use Imanee\Exception\ImageNotFoundException;
+use Imanee\Exception\InvalidColorException;
+use Imanee\Exception\UnsupportedFormatException;
+use Imanee\Exception\UnsupportedMethodException;
 use Imanee\ImageResource\GDResource;
+use PHPUnit\Framework\TestCase;
 
-class GDResourceTest extends \PHPUnit_Framework_TestCase
+class GDResourceTest extends TestCase
 {
     /**
      * @covers \Imanee\ImageResource\GDResource::load
      * @group imanee-33
-     * @expectedException \Imanee\Exception\ImageNotFoundException
-     * @expectedExceptionMessage File '/path/to/nowhere' not found. Are you sure this is the right path?
      */
     public function testExceptionIsThrownIfImagePathIsNotFound()
     {
+        $this->expectException(ImageNotFoundException::class);
+        $this->expectExceptionMessage("File '/path/to/nowhere' not found. Are you sure this is the right path?");
+
         $imageResource = new GDResource();
         $imageResource->load('/path/to/nowhere');
     }
@@ -29,12 +35,13 @@ class GDResourceTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers \Imanee\ImageResource\GDResource::load
      * @group imanee-33
-     * @expectedException \Imanee\Exception\UnsupportedFormatException
-     * @expectedExceptionMessage The format 'image/tiff' is not supported by this Resource.
      * @todo \Imanee\ImageResource\GDResource::load uses static method Imanee::getImageInfo
      */
     public function testLoadingUnsupportedImageThrowsException()
     {
+        $this->expectException(UnsupportedFormatException::class);
+        $this->expectExceptionMessage("The format 'image/tiff' is not supported by this Resource.");
+
         $file = __DIR__ . '/_files/imanee.tiff';
         $imageResource = new GDResource();
         $imageResource->load($file);
@@ -71,10 +78,11 @@ class GDResourceTest extends \PHPUnit_Framework_TestCase
      * @covers \Imanee\ImageResource\GDResource::load
      * @group imanee-33
      * @dataProvider badColorProvider
-     * @expectedException \Imanee\Exception\InvalidColorException
      */
     public function testLoadColourFailsWithBadInput($color)
     {
+        $this->expectException(InvalidColorException::class);
+
         $file = __DIR__ . '/_files/imanee.png';
         $gdResource = new GDResource();
         $gdResource->load($file);
@@ -102,10 +110,11 @@ class GDResourceTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers \Imanee\ImageResource\GDResource::output
-     * @expectedException \Imanee\Exception\UnsupportedFormatException
      */
     public function testThrowErrorWhenFormatNotSupported()
     {
+        $this->expectException(UnsupportedFormatException::class);
+
         $file = __DIR__ . '/_files/imanee.png';;
         $gdResource = new GDResource();
         $gdResource->load($file);
@@ -122,11 +131,10 @@ class GDResourceTest extends \PHPUnit_Framework_TestCase
         ];
     }
 
-    /**
-     * @expectedException Imanee\Exception\UnsupportedMethodException
-     */
     public function testGetGifFramesShouldThrowExceptionAsUnsupported()
     {
+        $this->expectException(UnsupportedMethodException::class);
+
         $imageResource = new GDResource();
         $imageResource->getGifFrames();
     }

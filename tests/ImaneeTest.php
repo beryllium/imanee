@@ -2,20 +2,23 @@
 
 namespace Imanee\Tests;
 
+use Imanee\Exception\FilterNotFoundException;
+use Imanee\Exception\UnsupportedFormatException;
 use Imanee\Imanee;
 use Imanee\Exception\UnsupportedMethodException;
+use PHPUnit\Framework\TestCase;
 
-class ImaneeTest extends \PHPUnit_Framework_TestCase
+class ImaneeTest extends TestCase
 {
     /** @var  Imanee */
     protected $model;
 
-    public function setup()
+    public function setup(): void
     {
         $this->model = new Imanee();
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         $this->model = null;
     }
@@ -216,12 +219,11 @@ class ImaneeTest extends \PHPUnit_Framework_TestCase
         $this->model->annotate('test', 10, 10, 20);
     }
 
-    /**
-     * @expectedException Imanee\Exception\UnsupportedMethodException
-     */
     public function testAnnotateShouldThrowExceptionIfNotSupported()
     {
-        $dummy = $this->getMock('Imanee\Model\ImageResourceInterface');
+        $this->expectException(UnsupportedMethodException::class);
+
+        $dummy = $this->createMock('Imanee\Model\ImageResourceInterface');
 
         $this->model->setResource($dummy);
         $this->model->annotate('test', 10, 10);
@@ -251,12 +253,11 @@ class ImaneeTest extends \PHPUnit_Framework_TestCase
         $this->model->placeText('testing', Imanee::IM_POS_MID_RIGHT, 10, 500);
     }
 
-    /**
-     * @expectedException Imanee\Exception\UnsupportedMethodException
-     */
     public function testPlaceTextShouldThrowExceptionIfNotSupported()
     {
-        $dummy = $this->getMock('Imanee\Model\ImageResourceInterface');
+        $this->expectException(UnsupportedMethodException::class);
+
+        $dummy = $this->createMock('Imanee\Model\ImageResourceInterface');
 
         $this->model->setResource($dummy);
         $this->model->placeText('testing');
@@ -276,12 +277,11 @@ class ImaneeTest extends \PHPUnit_Framework_TestCase
         $this->model->compositeImage('test.jpg', 0, 0, 200, 200);
     }
 
-    /**
-     * @expectedException Imanee\Exception\UnsupportedMethodException
-     */
     public function testCompositeImageShouldThrowExceptionIfNotSupported()
     {
-        $dummy = $this->getMock('Imanee\Model\ImageResourceInterface');
+        $this->expectException(UnsupportedMethodException::class);
+
+        $dummy = $this->createMock('Imanee\Model\ImageResourceInterface');
 
         $this->model->setResource($dummy);
         $this->model->compositeImage('test.jpg', 0, 0, 200, 200);
@@ -325,23 +325,21 @@ class ImaneeTest extends \PHPUnit_Framework_TestCase
         $this->model->placeImage($imanee, Imanee::IM_POS_MID_CENTER, 200, 200);
     }
 
-    /**
-     * @expectedException Imanee\Exception\UnsupportedMethodException
-     */
     public function testPlaceImageShouldThrowExceptionIfNotSupported()
     {
-        $dummy = $this->getMock('Imanee\Model\ImageResourceInterface');
+        $this->expectException(UnsupportedMethodException::class);
+
+        $dummy = $this->createMock('Imanee\Model\ImageResourceInterface');
 
         $this->model->setResource($dummy);
         $this->model->placeImage('test.jpg', Imanee::IM_POS_MID_CENTER);
     }
 
-    /**
-     * @expectedException Imanee\Exception\UnsupportedFormatException
-     */
     public function testPlaceImageShouldThrowExceptionIfWrongObject()
     {
-        $dummy = $this->getMock('Imanee\Model\ImageResourceInterface');
+        $this->expectException(UnsupportedFormatException::class);
+
+        $dummy = $this->createMock('Imanee\Model\ImageResourceInterface');
 
         $this->model->placeImage($dummy, Imanee::IM_POS_MID_CENTER);
     }
@@ -365,8 +363,8 @@ class ImaneeTest extends \PHPUnit_Framework_TestCase
 
     public function testAddGetFilters()
     {
-        $filter1 = $this->getMock('Imanee\Model\FilterInterface');
-        $filter2 = $this->getMock('Imanee\Model\FilterInterface');
+        $filter1 = $this->createMock('Imanee\Model\FilterInterface');
+        $filter2 = $this->createMock('Imanee\Model\FilterInterface');
 
         $this->model
             ->addFilter($filter1)
@@ -377,23 +375,21 @@ class ImaneeTest extends \PHPUnit_Framework_TestCase
         $this->assertContains($filter2, $this->model->getFilters());
     }
 
-    /**
-     * @expectedException Imanee\Exception\UnsupportedMethodException
-     */
     public function testAddFilterShouldThrowExceptionIfNotSupported()
     {
-        $dummy = $this->getMock('Imanee\Model\ImageResourceInterface');
+        $this->expectException(UnsupportedMethodException::class);
+
+        $dummy = $this->createMock('Imanee\Model\ImageResourceInterface');
 
         $this->model->setResource($dummy);
-        $this->model->addFilter($this->getMock('Imanee\Model\FilterInterface'));
+        $this->model->addFilter($this->createMock('Imanee\Model\FilterInterface'));
     }
 
-    /**
-     * @expectedException Imanee\Exception\UnsupportedMethodException
-     */
     public function testGetFiltersShouldThrowExceptionIfNotSupported()
     {
-        $dummy = $this->getMock('Imanee\Model\ImageResourceInterface');
+        $this->expectException(UnsupportedMethodException::class);
+
+        $dummy = $this->createMock('Imanee\Model\ImageResourceInterface');
 
         $this->model->setResource($dummy);
         $this->model->getFilters();
@@ -427,22 +423,20 @@ class ImaneeTest extends \PHPUnit_Framework_TestCase
         $imanee->applyFilter('filter_bw');
     }
 
-    /**
-     * @expectedException Imanee\Exception\UnsupportedMethodException
-     */
     public function testApplyFilterShouldThrowExceptionIfNotSupported()
     {
-        $dummy = $this->getMock('Imanee\Model\ImageResourceInterface');
+        $this->expectException(UnsupportedMethodException::class);
+
+        $dummy = $this->createMock('Imanee\Model\ImageResourceInterface');
 
         $this->model->setResource($dummy);
         $this->model->applyFilter('filter_bw');
     }
 
-    /**
-     * @expectedException Imanee\Exception\FilterNotFoundException
-     */
     public function testApplyFilterShouldThrowExceptionIfFilterNotFound()
     {
+        $this->expectException(FilterNotFoundException::class);
+
         $this->model->applyFilter('filter_test');
     }
 
@@ -461,11 +455,10 @@ class ImaneeTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(4, $this->model->getFrames());
     }
 
-    /**
-     * @expectedException \InvalidArgumentException
-     */
     public function testRemoveFrameShouldThrowExceptionIfOffsetNotExists()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->model->addFrame('image01.jpg');
         $this->model->addFrame('image02.jpg');
 
@@ -488,12 +481,11 @@ class ImaneeTest extends \PHPUnit_Framework_TestCase
         $this->model->animate();
     }
 
-    /**
-     * @expectedException Imanee\Exception\UnsupportedMethodException
-     */
     public function testAnimateShouldThrowExceptionIfNotSupported()
     {
-        $dummy = $this->getMock('Imanee\Model\ImageResourceInterface');
+        $this->expectException(UnsupportedMethodException::class);
+
+        $dummy = $this->createMock('Imanee\Model\ImageResourceInterface');
 
         $this->model->setResource($dummy);
         $this->model->animate();

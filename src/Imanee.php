@@ -66,7 +66,7 @@ class Imanee
      *                                              which case a resource will be automatically
      *                                              created based on current extensions available.
      */
-    public function __construct($path = null, ImageResourceInterface $resource = null)
+    public function __construct($path = null, ?ImageResourceInterface $resource = null)
     {
         $this->drawer = new Drawer();
 
@@ -722,10 +722,10 @@ class Imanee
      */
     public static function textGen(
         $text,
-        Drawer $drawer = null,
+        ?Drawer $drawer = null,
         $format = 'png',
         $background = 'transparent',
-        ImageResourceInterface $resource = null
+        ?ImageResourceInterface $resource = null
     ) {
         $imanee = new Imanee(null, $resource);
 
@@ -734,7 +734,7 @@ class Imanee
         }
 
         $size = $imanee->resource->getTextGeometry($text, $imanee->getDrawer());
-        $imanee->newImage($size['width'], $size['height'], $background);
+        $imanee->newImage($size['width'] ?? null, $size['height'] ?? null, $background);
         $imanee->setFormat($format);
 
         $imanee->placeText($text, Imanee::IM_POS_TOP_LEFT);

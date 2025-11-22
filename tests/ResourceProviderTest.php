@@ -2,11 +2,13 @@
 
 namespace Imanee\Tests;
 
+use Imanee\Exception\ExtensionNotFoundException;
+use Imanee\Exception\UnsupportedFormatException;
 use Imanee\ResourceProvider;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use Mockery;
 
-class ResourceProviderTest extends PHPUnit_Framework_TestCase
+class ResourceProviderTest extends TestCase
 {
     /**
      * @var Mockery\MockInterface
@@ -18,17 +20,16 @@ class ResourceProviderTest extends PHPUnit_Framework_TestCase
      */
     private $resourceProvider;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->PhpExtensionAvailabilityChecker = Mockery::mock('Imanee\PhpExtensionAvailabilityChecker');
         $this->resourceProvider = new ResourceProvider($this->PhpExtensionAvailabilityChecker);
     }
 
-    /**
-     * @expectedException Imanee\Exception\ExtensionNotFoundException
-     */
     public function testshouldFailIfNoUsableExtensionIsAvailable()
     {
+        $this->expectException(ExtensionNotFoundException::class);
+
         $this->PhpExtensionAvailabilityChecker
             ->shouldReceive('isLoaded')
             ->with('imagick')
